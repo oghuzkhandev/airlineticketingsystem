@@ -1,0 +1,13 @@
+/* Tarayıcı varsayılan stillerini sıfırlamak için */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Temel stil kuralları */
+  body {
+    font-family: 'Arial, sans-serif';
+    background-color: #f0f2f5;
+  }
+  
