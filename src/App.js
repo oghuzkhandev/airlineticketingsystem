@@ -1,27 +1,23 @@
-import React from 'react';
-import { Layout } from 'antd';
-import { BrowserRouter as Router, Routes    } from 'react-router-dom';
-import AppHeader from './components/Header';
-import './index.css';
-import './styles/Global.css'; // Global stiller
-
-const { Content, Footer } = Layout;
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/header";
+import "./index.css";
+import "./styles/Global.css";
 
 const App = () => {
   return (
     <Router>
-      <Layout className="layout">
-        <AppHeader />
-        <Content style={{ padding: '0 50px' }}>
-          <div className="site-layout-content">
-            <Routes>
-            </Routes>
-          </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>Airline Booking ©2024 Created by YourName</Footer>
-      </Layout>
+      <div>
+        <Header />
+        <main className="app-content">
+          <Routes>
+            <Route />
+            <Route />
+          </Routes>
+        </main>
+      </div>
     </Router>
   );
-}
+};
 
 export default App;
