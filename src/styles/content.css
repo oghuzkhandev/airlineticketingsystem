@@ -1,0 +1,15 @@
+.input-number-custom .ant-input-number-input {
+  text-align: right;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.placeholderdiv input::placeholder{
+  font-size: 12px;
+  text-align: start;
+}
+.relative-placeholder span {
+  font-size: 12px;
+}
+
