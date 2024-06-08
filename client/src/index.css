@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+  }
+
+  .custom-shadow {
+    transition: box-shadow 0.3s ease, transform 0.1s ease;
+  }
+  .custom-shadow:active {
+    transform: scale(0.90);
+    transition: transform 0.1s ease;
+  }
+  .custom-shadow:hover{
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.9);
+  }
+  
+  
