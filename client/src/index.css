@@ -13,10 +13,10 @@
   }
 
   .custom-shadow {
-    transition: box-shadow 0.3s ease, transform 0.1s ease;
+    transition: box-shadow 0.2s ease, transform 0.1s ease;
   }
   .custom-shadow:active {
-    transform: scale(0.90);
+    transform: scale(0.95);
     transition: transform 0.1s ease;
   }
   .custom-shadow:hover{

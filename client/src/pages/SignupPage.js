@@ -9,9 +9,7 @@ function SignupPage() {
   });
 
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
-  const [isUsernameTaken, setIsUsernameTaken] = useState(false);
-  const [isEmailTaken, setIsEmailTaken] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,29 +22,16 @@ function SignupPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccess(false);
-    setError("");
-    setIsUsernameTaken(false);
-    setIsEmailTaken(false);
+    setError(false);
 
     try {
-      const response = await fetch("http://localhost:4000/api/signup", {
+      const response = await fetch("http://localhost:4000/api/miles-signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-
-      if (response.status === 400) {
-        const data = await response.json();
-        setError(data.message);
-        if (data.message === "Username is already taken.") {
-          setIsUsernameTaken(true);
-        } else if (data.message === "Email is already registered.") {
-          setIsEmailTaken(true);
-        }
-        return;
-      }
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -62,7 +47,7 @@ function SignupPage() {
       });
     } catch (error) {
       console.error("Error:", error);
-      setError("An error occurred during sign up.");
+      setError(true);
     }
   };
 
@@ -85,15 +70,8 @@ function SignupPage() {
               value={formData.username}
               onChange={handleChange}
               required
-              className={`w-full px-3 py-2 border rounded ${
-                isUsernameTaken ? "border-red-500" : "border-gray-300"
-              }`}
+              className="w-full px-3 py-2 border rounded"
             />
-            {isUsernameTaken && (
-              <span className="text-red-500 text-sm mt-1">
-                This username is already taken.
-              </span>
-            )}
           </div>
           <div className="mb-4 flex flex-col mx-auto w-[450px]">
             <label className="block text-gray-700" htmlFor="password">
@@ -120,15 +98,8 @@ function SignupPage() {
               value={formData.email}
               onChange={handleChange}
               required
-              className={`w-full px-3 py-2 border rounded ${
-                isEmailTaken ? "border-red-500" : "border-gray-300"
-              }`}
+              className="w-full px-3 py-2 border rounded"
             />
-            {isEmailTaken && (
-              <span className="text-red-500 text-sm mt-1">
-                This email is already registered.
-              </span>
-            )}
           </div>
           <div className="flex justify-center">
             <button
@@ -158,8 +129,10 @@ function SignupPage() {
             Account created successfully.
           </div>
         )}
-        {error && !isUsernameTaken && !isEmailTaken && (
-          <div className="mt-4 text-red-600 text-center">{error}</div>
+        {error && (
+          <div className="mt-4 text-red-600 text-center">
+            Error creating account.
+          </div>
         )}
       </div>
     </div>

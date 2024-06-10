@@ -52,8 +52,19 @@ const LoginPage = () => {
         setMessage(`Welcome, ${data.username}!`);
       }
 
+      localStorage.setItem("token", data.token);
       localStorage.setItem("username", data.username);
       localStorage.setItem("isAdmin", data.isAdmin);
+      localStorage.setItem("isMilesMember", data.isMilesMember);
+      localStorage.setItem("userId", data.userId);
+      localStorage.setItem("milesMemberNumber", data.milesMemberNumber);
+
+      console.log("Storing data to localStorage:");
+      console.log("username:", data.username);
+      console.log("isAdmin:", data.isAdmin);
+      console.log("isMilesMember:", data.isMilesMember);
+      console.log("userId:", data.userId);
+      console.log("milesMemberNumber:", data.milesMemberNumber);
 
       navigate("/");
 
