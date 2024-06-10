@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
   isMilesMember: { type: Boolean, default: false },
   isAdmin: { type: Boolean, default: false },
   milesPoints: { type: Number, default: 0 },
+  milesMemberNumber: { type: String, unique: true },
 });
 
 const User = mongoose.model("User", userSchema);

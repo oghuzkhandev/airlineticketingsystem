@@ -25,12 +25,20 @@ const MSsignupPage = () => {
     });
   };
 
+  const generateMilesMemberNumber = () => {
+    return Math.floor(1000 + Math.random() * 9000).toString();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccessMessage("");
     setErrorMessage("");
 
-    const milesMemberData = { ...formData, isMilesMember: true };
+    const milesMemberData = {
+      ...formData,
+      isMilesMember: true,
+      milesMemberNumber: generateMilesMemberNumber(),
+    };
 
     try {
       const response = await fetch("http://localhost:4000/api/miles-signup", {
@@ -56,8 +64,9 @@ const MSsignupPage = () => {
           gender: "",
         });
       } else {
-        console.error("Failed to register");
-        setErrorMessage("Failed to register.");
+        const errorData = await response.json();
+        console.error("Failed to register:", errorData.message);
+        setErrorMessage(errorData.message || "Failed to register.");
       }
     } catch (error) {
       console.error("Error:", error);
