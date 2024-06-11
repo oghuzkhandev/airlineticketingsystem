@@ -41,36 +41,42 @@ const LoginPage = () => {
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log("Response:", data);
-
-      if (data.isAdmin) {
-        setMessage(`Welcome, Admin ${data.username}!`);
       } else {
-        setMessage(`Welcome, ${data.username}!`);
+        const data = await response.json();
+        console.log("Response:", data);
+
+        if (data.isAdmin) {
+          setMessage(`Welcome, Admin ${data.username}!`);
+        } else {
+          setMessage(`Welcome, ${data.username}!`);
+        }
+
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("firstName", data.firstName);
+        localStorage.setItem("userEmail", data.email);
+        localStorage.setItem("username", data.username);
+        localStorage.setItem("isAdmin", data.isAdmin);
+        localStorage.setItem("isMilesMember", data.isMilesMember);
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("milesMemberNumber", data.milesMemberNumber);
+
+        console.log("Storing data to localStorage:");
+        console.log("userId:", data.userId);
+        console.log("username:", data.username);
+        console.log("userEmail:", data.userEmail);
+        console.log("firstName:", data.firstName);
+        console.log("isAdmin:", data.isAdmin);
+        console.log("isMilesMember:", data.isMilesMember);
+        console.log("milesMemberNumber:", data.milesMemberNumber);
+
+        console.log("Login successful:", data);
+
+        navigate("/");
+
+        setTimeout(() => {
+          setMessage("");
+        }, 10000);
       }
-
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("username", data.username);
-      localStorage.setItem("isAdmin", data.isAdmin);
-      localStorage.setItem("isMilesMember", data.isMilesMember);
-      localStorage.setItem("userId", data.userId);
-      localStorage.setItem("milesMemberNumber", data.milesMemberNumber);
-
-      console.log("Storing data to localStorage:");
-      console.log("username:", data.username);
-      console.log("isAdmin:", data.isAdmin);
-      console.log("isMilesMember:", data.isMilesMember);
-      console.log("userId:", data.userId);
-      console.log("milesMemberNumber:", data.milesMemberNumber);
-
-      navigate("/");
-
-      setTimeout(() => {
-        setMessage("");
-      }, 10000);
     } catch (error) {
       console.error("Error:", error);
       setError("An error occurred during login.");

@@ -24,12 +24,12 @@ const sendWelcomeEmail = async (email, username) => {
   }
 };
 
-const sendPointsUpdateEmail = async (email, username, points) => {
+const sendPointsUpdateEmail = async (email, firstName, points) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: email,
     subject: "Miles&Smiles Points Update",
-    text: `Dear ${username}, your account has been updated with ${points} points.`,
+    text: `Dear ${firstName}, you have earned ${points} miles points after purchasing the flight ticket. Have a nice day :)`,
   };
 
   try {
