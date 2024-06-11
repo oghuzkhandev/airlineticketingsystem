@@ -24,5 +24,6 @@ yarn-error.log*
 
 # Ignore node_modules in client directory
 client/node_modules
+api/node_modules
 node_modules
 .cache
