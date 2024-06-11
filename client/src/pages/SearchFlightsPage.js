@@ -14,11 +14,15 @@ const SearchFlightsPage = () => {
   const [useMiles, setUseMiles] = useState(false);
   const location = useLocation();
   const { searchParams, passengers, classType } = location.state || {};
-  const userId = localStorage.getItem("userId"); // Kullanıcı ID'sini localStorage'dan al
+  const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const email = localStorage.getItem("userEmail");
+  const firstName = localStorage.getItem("userFirstName");
+  const milesMemberNumber = localStorage.getItem("milesMemberNumber");
 
   useEffect(() => {
-    console.log("Stored User ID:", userId); // userId'nin doğru bir şekilde alınıp alınmadığını kontrol et
+    console.log("Stored User ID:", userId);
     const fetchFlights = async () => {
       if (!searchParams) return;
 
@@ -75,9 +79,12 @@ const SearchFlightsPage = () => {
       "Sending milesMemberNumber:",
       localStorage.getItem("milesMemberNumber")
     );
+    console.log("Token:", token);
+    console.log("Email:", email);
+    console.log("First Name:", firstName);
+    console.log("Miles Member Number:", milesMemberNumber);
 
     try {
-      // Kapasiteyi güncelle
       const response = await fetch(
         `http://localhost:4000/api/flights/update-capacity/${selectedFlight._id}`,
         {
@@ -125,6 +132,48 @@ const SearchFlightsPage = () => {
               message.success(
                 `Congratulations! You have earned ${milesPointsEarned} Miles Points.`
               );
+              const updateMilesResponse = await fetch(
+                `http://localhost:4000/api/miles-points/update-miles`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                  body: JSON.stringify({
+                    milesMemberNumber:
+                      localStorage.getItem("milesMemberNumber"),
+                    points: milesPointsEarned,
+                  }),
+                }
+              );
+              if (updateMilesResponse.ok) {
+                console.log("Miles points updated successfully");
+
+                const emailResponse = await fetch(
+                  "http://localhost:4000/api/send-points-update-email",
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                      email,
+                      firstName,
+                      points: milesPointsEarned,
+                    }),
+                  }
+                );
+
+                if (emailResponse.ok) {
+                  console.log("Email sent successfully");
+                } else {
+                  console.error("Failed to send email");
+                }
+              } else {
+                console.error("Failed to update miles points");
+              }
             }
           } else {
             console.error("Failed to save purchase:", purchaseData.message);

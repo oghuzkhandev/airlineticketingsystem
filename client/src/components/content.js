@@ -3,8 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import background from "../images/maldives.jpeg";
 import { Button, Radio, DatePicker, InputNumber, Modal } from "antd";
 import "../styles/content.css";
-import australia from "../images/Australia.jpeg";
-import tkwallet from "../images/TK-Wallet.jpg";
+import australiaimg from "../images/Australia.jpeg";
+import tkwalletimg from "../images/TK-Wallet.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlaneCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
@@ -194,7 +194,7 @@ const MainPage = () => {
           <div className="p-6 rounded-lg card">
             <img
               className="w-full h-[300px] rounded-t-lg"
-              src={tkwallet}
+              src={tkwalletimg}
               alt="TK Wallet"
             />
             <div className="p-4">
@@ -216,7 +216,7 @@ const MainPage = () => {
           <div className="p-6 rounded-lg card">
             <img
               className="w-full rounded-t-lg"
-              src={australia}
+              src={australiaimg}
               alt="Australia"
             />
             <div className="p-4">

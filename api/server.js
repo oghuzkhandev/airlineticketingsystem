@@ -45,6 +45,8 @@ const flightRoutes = require("./routes/flightRoutes");
 const protectedRoutes = require("./routes/protectedRoutes");
 const purchasedRoutes = require("./routes/purchasedRoutes");
 const milesPointsRoutes = require("./routes/milesPointsRoutes");
+const airportRoutes = require("./routes/airportRoutes");
+const airlineRoutes = require("./routes/airlinesRoutes");
 
 app.use("/api/flights", flightRoutes);
 app.use("/api", userRoutes);
@@ -52,6 +54,8 @@ app.use("/api", milesRoutes);
 app.use("/api", protectedRoutes);
 app.use("/api", purchasedRoutes);
 app.use("/api/miles-points", milesPointsRoutes);
+app.use("/api/v1", airportRoutes);
+app.use("/api/v1", airlineRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

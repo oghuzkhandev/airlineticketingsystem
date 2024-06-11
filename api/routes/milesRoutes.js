@@ -2,7 +2,11 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
-const { sendWelcomeEmail } = require("../services/emailService");
+const {
+  sendWelcomeEmail,
+  sendPointsUpdateEmail,
+} = require("../services/emailService");
+const authenticateToken = require("../middlewares/authentication");
 
 router.post("/miles-signup", async (req, res) => {
   try {
@@ -52,6 +56,21 @@ router.post("/miles-signup", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+router.post(
+  "/send-points-update-email",
+  authenticateToken,
+  async (req, res) => {
+    const { email, firstName, points } = req.body;
+
+    try {
+      await sendPointsUpdateEmail(email, firstName, points);
+      res.status(200).json({ message: "Email sent successfully" });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to send email", error });
+    }
+  }
+);
 
 router.get("/miles-members", async (req, res) => {
   try {
