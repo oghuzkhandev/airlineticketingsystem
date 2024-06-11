@@ -181,6 +181,7 @@ To build and run the API container:
 docker build -t myapi -f Dockerfile.api .
 docker run -d -p 4000:4000 --name myapi-container myapi
 
+VIDEO : 
 
-
+https://drive.google.com/file/d/1nc5PERg8-Ps3H0umWpWZEtFi6w3G60oj/view?usp=sharing
 
