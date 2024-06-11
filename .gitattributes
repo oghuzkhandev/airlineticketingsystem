@@ -2,3 +2,5 @@
 client/node_modules/.cache/default-development/58.pack filter=lfs diff=lfs merge=lfs -text
 client/node_modules/.cache/default-development/*.pack filter=lfs diff=lfs merge=lfs -text
 client/node_modules/.cache/default-development/30.pack filter=lfs diff=lfs merge=lfs -text
+.git/objects/pack/pack-07b433b1869151ec4d1cb02edc2f59f888ec9fea.pack filter=lfs diff=lfs merge=lfs -text
+.git/lfs/objects/f1/0d/f10d178b40611ede84f327019c0916f502fa2a4df684a68154d0b87e64567802 filter=lfs diff=lfs merge=lfs -text
